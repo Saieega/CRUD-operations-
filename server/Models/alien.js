@@ -2,21 +2,30 @@ const mongoose=require('mongoose')
 
 const alienSchema=new mongoose.Schema
 ({
-    name:
-    {
-        type:String,
+    studentName: {
+        type: String,
         required:true
     },
-    tech:
-    {
-        type:String,
-        required:true
+    skillName: {
+        type: String,
+        required: true
     },
-    sub:
-    {
-        type:Boolean,
-        required:true,
-        default:false
+    proficiency: {
+        type: String,
+        required: true,
+        enum: ['Beginner', 'Intermediate', 'Expert']
+    },
+    yearsOfExperience: {
+        type: Number,
+        required: true
+    },
+    category: {
+        type: String,
+        required: true
+    },
+    certified: {
+        type: Boolean,
+        default: false
     }
-})
+});
 module.exports = mongoose.model('Alien', alienSchema);

@@ -27,9 +27,12 @@ router.post('/',async(req,res)=>
 {
     const alien=new Alien
     ({
-        name:req.body.name,
-        tech:req.body.tech,
-        sub:req.body.sub
+        studentName: req.body.studentName,
+        skillName: req.body.skillName,
+        proficiency: req.body.proficiency,
+        yearsOfExperience: req.body.yearsOfExperience,
+        category: req.body.category,
+        certified: req.body.certified
     })
     try{
         const a1=await alien.save()
@@ -43,10 +46,12 @@ router.post('/',async(req,res)=>
 router.patch('/:id',async(req,res)=>
 {
     try {
-        const alien=await Alien.findById(req.params.id)
-        alien.sub=req.body.sub
-        const a1=await alien.save()
-        res.json(a1)
+        const alien=await Alien.findById(req.params.id);
+        if (req.body.certified!==undefined){
+            alien.certified=req.body.certified;
+        }
+        const a1=await alien.save();
+        res.json(a1);
     }
     catch (err){
         res.send('Error'+err)
